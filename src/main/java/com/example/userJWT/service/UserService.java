@@ -30,20 +30,24 @@ public class UserService {
         for (UserEntity val : data) {
             String name;
             String fecha;
-            if (val.getNombre() == nombre) {
+            System.out.println("val.getNombre() = " + val.getNombre());
+           // if (val.getNombre() == nombre) {
+                System.out.println("ERROR ENCONTRADO ");
                 name = val.getNombre();
-                System.out.println("val.getNombre() = " + val.getNombre());
+
                 fecha = val.getBirtDay();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                //System.out.println("YEARS= " + fecha);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
                 LocalDate fechaLocalDate = LocalDate.parse(fecha, formatter);
                 LocalDate daynow = LocalDate.now();//1992-03-18
                 long diferenciaEnYears = ChronoUnit.YEARS.between(fechaLocalDate, daynow);
-                System.out.println("YEARS= " + diferenciaEnYears);
+                //System.out.println("YEARS= " + diferenciaEnYears);
                 Long Plazo = diferenciaEnYears;
+            System.out.println("YEARS= " + Plazo);
                 resp = new ArrayList<>();
                 resp.add("nombre: "+name);
                 resp.add("años: "+Plazo);
-            }
+            //}
 
 
 
