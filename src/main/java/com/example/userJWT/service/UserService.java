@@ -1,18 +1,14 @@
 package com.example.userJWT.service;
-import com.example.userJWT.dto.CreateUserDTO;
 import com.example.userJWT.entity.UserEntity;
 import com.example.userJWT.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserService {
@@ -29,23 +25,27 @@ public class UserService {
     public List<Object> userByNombre(String nombre) {
 
 
-        List<UserEntity> data = (List<UserEntity>) userRepository.findByNombre(nombre);
+        List<UserEntity> data =  userRepository.findByNombre(nombre);
         List<Object> resp = null;
         for (UserEntity val : data) {
             String name;
             String fecha;
             if (val.getNombre() == nombre) {
                 name = val.getNombre();
+                System.out.println("val.getNombre() = " + val.getNombre());
                 fecha = val.getBirtDay();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 LocalDate fechaLocalDate = LocalDate.parse(fecha, formatter);
                 LocalDate daynow = LocalDate.now();//1992-03-18
-                long diferenciaEnDias = ChronoUnit.DAYS.between(fechaLocalDate, daynow);
-                Long Plazo = diferenciaEnDias;
+                long diferenciaEnYears = ChronoUnit.YEARS.between(fechaLocalDate, daynow);
+                System.out.println("YEARS= " + diferenciaEnYears);
+                Long Plazo = diferenciaEnYears;
                 resp = new ArrayList<>();
-                resp.add(name);
-                resp.add(Plazo);
+                resp.add("nombre: "+name);
+                resp.add("años: "+Plazo);
             }
+
+
 
         }
         return resp;

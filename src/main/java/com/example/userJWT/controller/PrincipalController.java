@@ -15,8 +15,8 @@ public class PrincipalController {
 
 
     @GetMapping("/user/{nombre}")
-    public UserEntity data(@PathVariable String nombre) {
-        return (UserEntity) userService.userByNombre(nombre);
+    public List<Object> data(@PathVariable String nombre) {
+        return  userService.userByNombre(nombre);
     }
 
     @GetMapping("/allUser")
