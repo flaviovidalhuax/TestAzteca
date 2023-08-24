@@ -44,7 +44,7 @@ public class UserService {
                 Long Plazo = diferenciaEnDias;
                 resp = new ArrayList<>();
                 resp.add(name);
-                resp.add(diferenciaEnDias);
+                resp.add(Plazo);
             }
 
         }
